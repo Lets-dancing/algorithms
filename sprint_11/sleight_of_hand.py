@@ -1,3 +1,5 @@
+# номер успешной посылки ID 68705378
+
 def sleight_of_hand():
     numbers = []
     scores = 0
