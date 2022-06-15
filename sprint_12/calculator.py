@@ -1,4 +1,4 @@
-# номер успешной посылки ID 68966286
+# номер успешной посылки ID 68972231
 class Stack:
     def __init__(self):
         self.items = []
@@ -31,9 +31,7 @@ def calculator(expression, stack=None, operators=OPERATORS, digitizer=int):
         try:
             stack.push(digitizer(element))
         except ValueError:
-            raise ValueError(
-                ('incorrect operator: {element}').format(element=element)
-                        )
+            raise ValueError(f'incorrect operator: {element}')
     return stack.pop()
 
 

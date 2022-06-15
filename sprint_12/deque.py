@@ -1,4 +1,4 @@
-# номер успешной посылки ID 68967320
+# номер успешной посылки ID 68972210
 class Deque:
     def __init__(self, max_size):
         self.items = [None] * max_size
@@ -7,35 +7,35 @@ class Deque:
         self.tail = 0
         self.size = 0
 
-    def push_front(self, params):
+    def push_front(self, value):
         if self.size == self.max_size:
-            raise RuntimeError('error')
+            raise IndexError('max size exceeded')
         self.head = (self.head - 1) % self.max_size
-        self.items[self.head] = params
+        self.items[self.head] = value
         self.size += 1
 
-    def push_back(self, params):
+    def push_back(self, value):
         if self.size == self.max_size:
-            raise RuntimeError('error')
+            raise IndexError('max size exceeded')
         self.tail = (self.tail + 1) % self.max_size
-        self.items[self.tail] = params
+        self.items[self.tail] = value
         self.size += 1
 
     def pop_front(self):
         if self.size == 0:
-            raise RuntimeError('error')
-        params = self.items[self.head]
+            raise IndexError('deque is empty')
+        value = self.items[self.head]
         self.head = (self.head + 1) % self.max_size
         self.size -= 1
-        return params
+        return value
 
     def pop_back(self):
         if self.size == 0:
-            raise RuntimeError('error')
-        params = self.items[self.tail]
+            raise IndexError('deque is empty')
+        value = self.items[self.tail]
         self.tail = (self.tail - 1) % self.max_size
         self.size -= 1
-        return params
+        return value
 
 
 if __name__ == '__main__':
@@ -45,11 +45,9 @@ if __name__ == '__main__':
         try:
             command, *params = input().split(' ')
             result = getattr(deque, command)(*params)
-            if '' in command and result is not None:
+            if result is not None:
                 print(result)
-        except RuntimeError:
+        except IndexError:
             print('error')
         except AttributeError:
-            raise ValueError(
-                ('command not found: {command}').format(command=command)
-            )
+            raise ValueError(f'command not found: {command}')
