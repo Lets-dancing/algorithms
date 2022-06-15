@@ -1,4 +1,4 @@
-# номер успешной посылки ID 68955013
+# номер успешной посылки ID 68967320
 class Deque:
     def __init__(self, max_size):
         self.items = [None] * max_size
@@ -7,35 +7,35 @@ class Deque:
         self.tail = 0
         self.size = 0
 
-    def push_front(self, value):
+    def push_front(self, params):
         if self.size == self.max_size:
-            raise OverflowError
+            raise RuntimeError('error')
         self.head = (self.head - 1) % self.max_size
-        self.items[self.head] = value
+        self.items[self.head] = params
         self.size += 1
 
-    def push_back(self, value):
+    def push_back(self, params):
         if self.size == self.max_size:
-            raise OverflowError
+            raise RuntimeError('error')
         self.tail = (self.tail + 1) % self.max_size
-        self.items[self.tail] = value
+        self.items[self.tail] = params
         self.size += 1
 
     def pop_front(self):
         if self.size == 0:
-            raise OverflowError
-        value = self.items[self.head]
+            raise RuntimeError('error')
+        params = self.items[self.head]
         self.head = (self.head + 1) % self.max_size
         self.size -= 1
-        return value
+        return params
 
     def pop_back(self):
         if self.size == 0:
-            raise OverflowError
-        value = self.items[self.tail]
+            raise RuntimeError('error')
+        params = self.items[self.tail]
         self.tail = (self.tail - 1) % self.max_size
         self.size -= 1
-        return value
+        return params
 
 
 if __name__ == '__main__':
@@ -45,7 +45,11 @@ if __name__ == '__main__':
         try:
             command, *params = input().split(' ')
             result = getattr(deque, command)(*params)
-            if 'pop' in command:
+            if '' in command and result is not None:
                 print(result)
-        except OverflowError:
+        except RuntimeError:
             print('error')
+        except AttributeError:
+            raise ValueError(
+                ('command not found: {command}').format(command=command)
+            )

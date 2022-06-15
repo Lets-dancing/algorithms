@@ -1,4 +1,4 @@
-# номер успешной посылки ID 68957245
+# номер успешной посылки ID 68966286
 class Stack:
     def __init__(self):
         self.items = []
@@ -10,7 +10,7 @@ class Stack:
         try:
             return self.items.pop()
         except IndexError:
-            raise IndexError('empty_stack')
+            raise IndexError('empty stack')
 
 
 OPERATORS = {
@@ -27,11 +27,13 @@ def calculator(expression, stack=None, operators=OPERATORS, digitizer=int):
         if element in operators:
             right, left = stack.pop(), stack.pop()
             stack.push(operators[element](left, right))
-        else:
-            try:
-                stack.push(digitizer(element))
-            except IndexError:
-                raise IndexError('digitization_error')
+            continue
+        try:
+            stack.push(digitizer(element))
+        except ValueError:
+            raise ValueError(
+                ('incorrect operator: {element}').format(element=element)
+                        )
     return stack.pop()
 
 
