@@ -1,3 +1,5 @@
+# номер успешной посылки ID 69193787
+
 def partition(arr, left, right):
     if right <= left:
         return
