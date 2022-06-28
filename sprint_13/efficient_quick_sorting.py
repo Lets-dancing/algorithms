@@ -1,4 +1,4 @@
-# номер успешной посылки ID 69193787
+# номер успешной посылки ID 69218253
 
 def partition(arr, left, right):
     if right <= left:
@@ -29,9 +29,9 @@ def quicksort(players):
 
 if __name__ == '__main__':
     clear_count = int(input())
-    participant = [None] * clear_count
-    for value in range(clear_count):
+    participant = []
+    for _ in range(clear_count):
         name, clear, penalty = input().split()
-        participant[value] = (-int(clear), int(penalty), name)
+        participant.append((-int(clear), int(penalty), name))
     result = quicksort(participant)
     print(*result, sep='\n')

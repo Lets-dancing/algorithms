@@ -1,4 +1,4 @@
-# номер успешной посылки ID 69193747
+# номер успешной посылки ID 69211940
 
 def broken_search(nums, target):
     left = 0
@@ -20,7 +20,9 @@ def broken_search(nums, target):
     return -1
 
 
+def main():
+    arr = [19, 21, 100, 101, 1, 4, 5, 7, 12]
+    assert broken_search(arr, 5) == 6
+
 if __name__ == '__main__':
-    def test():
-        arr = [19, 21, 100, 101, 1, 4, 5, 7, 12]
-        assert broken_search(arr, 5) == 6
+    main()
